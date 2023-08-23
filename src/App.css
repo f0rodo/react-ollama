@@ -1,38 +1,99 @@
 .App {
-  text-align: center;
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.history-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  height: 82vh;
+  overflow-y: scroll;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.message {
+  padding: 10px;
+  margin: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.message.user {
+  background-color: #f3f3f3;
+}
+
+.message.server {
+  background-color: #e6f7ff;
+}
+
+.input-area {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: flex-end;
+}
+
+.textarea {
+  width: 80%;
+  height: 100px;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.send-button {
+  padding: 10px 20px;
+  background-color: #007bff;
   color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.send-button:hover {
+  background-color: #0056b3;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.send-button.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.textarea-editable {
+  width: 95%;
+  height: 60px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+.feedback-icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+  justify-content: space-evenly;
+  margin-left: 20px;
+}
+
+.feedback-icons button {
+  border: none;
+  background-color: transparent;
+}
+
+.feedback-icons button.selected {
+  border: none;
+  background-color: rgba(0, 123, 255, 0.2);
+  border-radius: 4px;
+}
+
+.feedback-icons .saveBtn {
+  background-color: #28a745;
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.feedback-icons .saveBtn:hover {
+  background-color: #218838;
 }
