@@ -10,6 +10,8 @@ function App() {
   const [feedback, setFeedback] = useState<{ [key: number]: 'up' | 'down' }>({});
   const [editableIndex, setEditableIndex] = useState<number | null>(null);
   const [editableText, setEditableText] = useState('');
+  const [selectedTag, setSelectedTag] = useState('');
+  const [tags, setTags] = useState<{name: string}[]>([]);
 
   const handleCancel = () => {
     if (editableIndex !== null) {
@@ -51,7 +53,7 @@ function App() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'llama2-uncensored',
+        model: selectedTag,
         prompt,
         system,
         template: '',
@@ -93,6 +95,15 @@ function App() {
       }
     }
   };
+
+
+  useEffect(() => {
+    fetch('http://localhost:11434/api/tags')
+    .then((response) => response.json())
+    .then((data: {models: any[]}) => {
+      setTags(data.models);
+    });
+  }, []);
 
   useEffect(() => {
     // if latest message is from the user, call sendPrompt
@@ -149,8 +160,16 @@ function App() {
           value={system}
           onChange={(e) => setSystem(e.target.value)}
         ></textarea>
+        <div>
 
-        <button
+        <select onChange={(v) => setSelectedTag(v.target.value)} >
+          {tags.map((tag) => (
+            <option key={tag.name} value={tag.name}>
+              {tag.name}
+            </option>
+          ))}
+        </select>
+                <button
           className={`send-button ${loading ? 'disabled' : ''}`}
           disabled={loading}
           onClick={async () => {
@@ -159,6 +178,7 @@ function App() {
         >
           Send
         </button>
+        </div>
       </div>
     </div>
   );
